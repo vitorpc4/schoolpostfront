@@ -17,6 +17,7 @@ import Link from "next/link";
 import { useCallback, useMemo, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import DeleteUser from "./DeleteUser";
+import CreateUser from "./CreateUser";
 
 export default function UsersTable() {
   const { association } = useSchool();
@@ -132,13 +133,27 @@ export default function UsersTable() {
     autoResetExpanded: false,
   });
 
+  const createUserHandle = (result: boolean) => {
+    if (result) {
+      dataQuery.refetch();
+      toast.success("Usuário criado com sucesso", {
+        duration: 2500,
+        position: "top-right",
+      });
+      return;
+    }
+
+    toast.error("Erro ao criar usuário", {
+      duration: 2500,
+      position: "top-right",
+    });
+  };
+
   return (
     <>
       <div>
-        <div className="flex flex-row justify-end">
-          <button className="btn">Criar usuário</button>
-        </div>
-        <table className="table table-zebra">
+        <CreateUser responseCreate={createUserHandle} />
+        <table className="table">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
