@@ -1,3 +1,4 @@
+import { get } from "http";
 import { ApiResponse } from "../Models/ApiResponse";
 import { ICreateUserRequest } from "../Models/Requests/Users/ICreateUserRequest";
 import { IUser } from "../Models/Response/IUser";
@@ -16,6 +17,14 @@ class UserRepository extends BaseRepository<IUser> {
       )
       .then(TransformResponse);
     return result as ApiResponse<any>;
+  }
+
+  update(id: string, data: any) {
+    return super.update(id, data);
+  }
+
+  get(id: string) {
+    return super.get(id);
   }
 }
 

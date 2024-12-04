@@ -18,6 +18,7 @@ import { useCallback, useMemo, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import DeleteUser from "./DeleteUser";
 import CreateUser from "./CreateUser";
+import EditUser from "./EditUser";
 
 export default function UsersTable() {
   const { association } = useSchool();
@@ -92,16 +93,14 @@ export default function UsersTable() {
       {
         header: "Ações",
         accessorKey: "actions",
+
         cell: ({ row }) => (
           <div className="dropdown dropdown-hover">
             <div tabIndex={0} role="button" className="btn m-1">
               <Ellipsis />
             </div>
             <div className="menu dropdown-content w-32 grid gap-1 z-50">
-              <Link href={`/editPost/id?id=${row.original.id}`} className="btn">
-                <Pencil />
-                Editar
-              </Link>
+              <EditUser id={row.original.id!} responseEdit={editUserHandle} />
 
               <DeleteUser user={row.original} onDeleted={deleteUser} />
             </div>
@@ -132,6 +131,17 @@ export default function UsersTable() {
     autoResetPageIndex: false,
     autoResetExpanded: false,
   });
+
+  const editUserHandle = (result: boolean) => {
+    if (result) {
+      dataQuery.refetch();
+      toast.success("Usuário atualizado com sucesso", {
+        duration: 2500,
+        position: "top-right",
+      });
+      return;
+    }
+  };
 
   const createUserHandle = (result: boolean) => {
     if (result) {
