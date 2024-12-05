@@ -56,16 +56,9 @@ export default function EditUser({ id, responseEdit }: IEditUserProps) {
     userRepository
       .get(id.toString())
       .then((res) => {
-        console.log("res >>>>", res);
-
-        console.log(getInfoSelectedStation());
-
         const userAssociation = res.data!.userSchoolAssociation?.find(
           (x) => x.school?.id === getInfoSelectedStation()?.school?.id
         );
-
-        console.log("user association: ");
-        console.log(userAssociation);
 
         formik.setFieldValue("username", res.data!.username);
         formik.setFieldValue("email", res.data!.email);

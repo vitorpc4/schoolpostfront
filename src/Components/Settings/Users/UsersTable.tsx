@@ -2,7 +2,7 @@
 
 import { useSchool } from "@/app/context/SchoolContext";
 import { ISchool } from "@/http/Models/Response/ISchool";
-import { IUser } from "@/http/Models/Response/IUser";
+import { IUserAssociation } from "@/http/Models/Response/IUserAssociation";
 import AssociationRepository from "@/http/Repository/AssociationRepository";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
@@ -69,11 +69,25 @@ export default function UsersTable() {
   };
 
   const deleteUser = useCallback((id: number) => {
-    console.log("deletando: ", id);
-    dataQuery.refetch();
+    const associationRepository = new AssociationRepository();
+    associationRepository
+      .delete(id.toString())
+      .then(() => {
+        toast.success("Usuário excluído com sucesso", {
+          duration: 2500,
+          position: "top-right",
+        });
+        dataQuery.refetch();
+      })
+      .catch(() => {
+        toast.error("Erro ao excluir usuário", {
+          duration: 2500,
+          position: "top-right",
+        });
+      });
   }, []);
 
-  const columns = useMemo<ColumnDef<IUser>[]>(
+  const columns = useMemo<ColumnDef<IUserAssociation>[]>(
     () => [
       {
         Header: "Id",

@@ -1,8 +1,8 @@
-import { IUser } from "../IUser";
+import { IUserAssociation } from "../IUserAssociation";
 
 export interface IGetUserAssocationResponse {
   totalItems: number;
   totalPages: number;
   hasMore?: boolean;
-  users: IUser[];
+  users: IUserAssociation[];
 }

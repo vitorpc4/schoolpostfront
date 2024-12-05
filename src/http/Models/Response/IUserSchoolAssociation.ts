@@ -1,11 +1,11 @@
 import { TypeUser } from "../Enum/TypeUser";
 import { IPost } from "./IPost";
 import { ISchool } from "./ISchool";
-import { IUser } from "./IUser";
+import { IUserAssociation } from "./IUserAssociation";
 
 export interface IUserSchoolAssociation {
   id?: number;
-  user: IUser;
+  user: IUserAssociation;
   school?: ISchool;
   post?: IPost[];
   status: boolean;

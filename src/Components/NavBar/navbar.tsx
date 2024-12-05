@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import { SelectSchool } from "../School/SelectSchool/SelectSchool";
 import { useRouter } from "next/navigation";
 import { ISchool } from "@/http/Models/Response/ISchool";
-import { IUser } from "@/http/Models/Response/IUser";
+import { IUserAssociation } from "@/http/Models/Response/IUserAssociation";
 import { IUserSchoolAssociation } from "@/http/Models/Response/IUserSchoolAssociation";
 import { TypeUser } from "@/http/Models/Enum/TypeUser";
 
