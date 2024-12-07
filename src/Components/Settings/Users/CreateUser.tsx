@@ -57,7 +57,6 @@ export default function CreateUser({ responseCreate }: ICreateUserProps) {
     userRepository
       .createUserAssociation(values)
       .then((res) => {
-        console.log("res >>>>", res);
         responseCreate(true);
         formik.resetForm();
         closeModal();
@@ -92,7 +91,6 @@ export default function CreateUser({ responseCreate }: ICreateUserProps) {
       admin: admin,
     },
     onSubmit: (values: IFormCreate) => {
-      console.log("tgeat");
       if (values.typeUser === TypeUser.Student) {
         values.admin = false;
       }

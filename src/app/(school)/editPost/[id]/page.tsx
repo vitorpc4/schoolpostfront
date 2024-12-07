@@ -14,7 +14,6 @@ const validationSchema = Yup.object({
   title: Yup.string()
     .min(8, "Campo titulo deve ter no mínimo 8 caracteres")
     .required("Campo titulo obrigatório"),
-  image: Yup.string().required("Campo imagem obrigatório"),
   content: Yup.string()
     .min(20, "Campo descrição deve ter no mínimo 20 caracteres")
     .required("Campo descrição é obrigatório"),
@@ -28,7 +27,6 @@ export default function EditPost() {
   const id = parseInt(useSearchParams().get("id")!);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
   const [author, setAuthor] = useState("");
   const [isDraft, setIsDraft] = useState(false);
   const [hydrated, setHydrated] = useState(false);
@@ -71,9 +69,8 @@ export default function EditPost() {
     postRepository.GetPost(id, school.id!).then((response) => {
       if (response.data) {
         setTitle(response.data.title);
-        setImage("https://img.daisyui.com/images/profile/demo/2@94.webp");
         setContent(response.data.content);
-        setAuthor("Autorzao pai");
+        setAuthor(response.data.username);
         setIsDraft(response.data.isDraft);
       }
     });
@@ -101,7 +98,7 @@ export default function EditPost() {
         });
       })
       .catch(() => {
-        toast.error("Erro ao criar post", {
+        toast.error("Erro ao atualizar post", {
           duration: 2500,
           position: "top-right",
         });
@@ -113,7 +110,6 @@ export default function EditPost() {
     validateOnChange: true,
     initialValues: {
       title: title,
-      image: image,
       content: content,
       author: author,
       isDraft: isDraft,
@@ -145,26 +141,6 @@ export default function EditPost() {
                 />
 
                 <ErrorMessage name="title">
-                  {(msg) => {
-                    return <div className="text-red-600 mt-2">{msg}</div>;
-                  }}
-                </ErrorMessage>
-              </label>
-            </fieldset>
-            <fieldset>
-              <label className="form-control w-full max-w" htmlFor="imagem">
-                <div className="label">
-                  <span className="label-text">Imagem</span>
-                </div>
-                <input
-                  type="text"
-                  onChange={formik.handleChange}
-                  value={formik.values.image}
-                  name="image"
-                  className="input input-bordered w-full max-w"
-                />
-
-                <ErrorMessage name="image">
                   {(msg) => {
                     return <div className="text-red-600 mt-2">{msg}</div>;
                   }}

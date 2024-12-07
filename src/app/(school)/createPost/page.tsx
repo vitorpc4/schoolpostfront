@@ -4,7 +4,6 @@ import { useSchool } from "@/app/context/SchoolContext";
 import EditorWysiwyg from "@/Components/EditorWySiwyg/EditorWysiwyg";
 import { IPostCreateRequest } from "@/http/Models/Requests/Post/IPostCreateRequest";
 import { ISchool } from "@/http/Models/Response/ISchool";
-import AssociationRepository from "@/http/Repository/AssociationRepository";
 import PostRepository from "@/http/Repository/PostRepository";
 import { ErrorMessage, FormikProvider, useFormik } from "formik";
 import { useEffect, useState } from "react";
@@ -15,22 +14,6 @@ const validationSchema = Yup.object().shape({
   title: Yup.string()
     .min(8, "Campo titulo deve ter no mínimo 8 caracteres")
     .required("Campo titulo obrigatório"),
-  image: Yup.mixed()
-    .required("Campo imagem obrigatório")
-    .test("FILE_FORMAT", "Only JPG and PNG files are allowed", (value: any) => {
-      if (value) {
-        const supportedFormats = ["jpeg", "png", "jpg"];
-        const extension = value?.name?.split(".").pop()?.toLowerCase();
-        return supportedFormats.includes(extension);
-      }
-      return true;
-    })
-    .test("FILE_SIZE", "File too large", (value: any) => {
-      if (value) {
-        return value instanceof File && value.size <= 1000 * 1024 * 1024;
-      }
-      return true;
-    }),
   content: Yup.string()
     .min(20, "Campo descrição deve ter no mínimo 20 caracteres")
     .required("Campo descrição é obrigatório"),
@@ -40,29 +23,7 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function CreatePost() {
-  const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("");
   const { association } = useSchool();
-
-  const saveData = (values: any, actions: any) => {
-    console.log(values.image);
-
-    const formData = new FormData();
-    formData.append("file", values.image);
-    formData.append("title", values.image.name);
-
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    };
-
-    console.log("formData: ", formData);
-
-    const post = values;
-    alert(JSON.stringify(post, null, 2));
-    actions.setSubmitting(false);
-  };
 
   const createPost = (values: IPostCreateRequest) => {
     const postRepository: PostRepository = new PostRepository();
@@ -77,8 +38,11 @@ export default function CreatePost() {
 
     postRepository
       .CreatePost(values, infoAssociation.school?.id!)
-      .then((response) => {
-        console.log(response);
+      .then(() => {
+        toast.success("Post criado com sucesso", {
+          duration: 2500,
+          position: "top-right",
+        });
       })
       .catch(() => {
         toast.error("Erro ao criar post", {
@@ -86,7 +50,6 @@ export default function CreatePost() {
           position: "top-right",
         });
       });
-    console.log(values);
   };
 
   const getInfoSelectedStation = () => {
@@ -108,7 +71,7 @@ export default function CreatePost() {
     const result = getInfoSelectedStation();
 
     if (result) {
-      setAuthor(result.user.username);
+      formik.setFieldValue("author", result.user.username!);
     }
   }, [association]);
 
@@ -117,15 +80,13 @@ export default function CreatePost() {
     validateOnChange: true,
     initialValues: {
       title: "",
-      image: undefined,
-      content: content,
-      author: author,
+      content: "",
+      author: "",
       isDraft: false,
       status: true,
       associationSchool: 0,
     },
     onSubmit: (values: IPostCreateRequest) => {
-      values.content = content;
       createPost(values);
     },
     validationSchema: validationSchema,
@@ -151,29 +112,6 @@ export default function CreatePost() {
                 />
 
                 <ErrorMessage name="title">
-                  {(msg) => {
-                    return <div className="text-red-600 mt-2">{msg}</div>;
-                  }}
-                </ErrorMessage>
-              </label>
-            </fieldset>
-            <fieldset>
-              <label className="form-control w-full max-w" htmlFor="imagem">
-                <div className="label">
-                  <span className="label-text">Imagem</span>
-                </div>
-                <input
-                  type="file"
-                  onChange={(event) => {
-                    const file = event.currentTarget.files?.[0];
-                    formik.setFieldValue("image", file);
-                  }}
-                  name="image"
-                  accept=".png, .jpeg, .jpg"
-                  className="file-input file-input-bordered max-w"
-                />
-
-                <ErrorMessage name="image">
                   {(msg) => {
                     return <div className="text-red-600 mt-2">{msg}</div>;
                   }}
@@ -208,7 +146,6 @@ export default function CreatePost() {
                 <EditorWysiwyg
                   valueFormik={formik.values.content}
                   onChangeFormik={(value) => {
-                    setContent(value);
                     formik.setFieldValue("content", value);
                   }}
                 />

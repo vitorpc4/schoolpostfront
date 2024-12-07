@@ -26,18 +26,16 @@ export const NavBar = () => {
   };
 
   const getInfoSelectedStation = () => {
+    if (!association) return;
+
     if (association.length > 0) {
       const getLocalStore = localStorage.getItem("selectedSchool");
-      console.log("galo doido");
-      console.log(user);
       if (getLocalStore != null) {
         const selectedSchool = JSON.parse(getLocalStore) as ISchool;
 
         const getAssociationBySchoolId = association.find(
           (x) => x.school?.id === selectedSchool.id
         );
-
-        console.log(getAssociationBySchoolId);
 
         if (getAssociationBySchoolId) {
           setUser(getAssociationBySchoolId);
