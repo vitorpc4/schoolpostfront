@@ -34,7 +34,6 @@ export const SelectSchool = () => {
 
     const associationRepository: AssociationRepository =
       new AssociationRepository();
-
     associationRepository
       .getUserAssociationByUserId(association[0].user.id!)
       .then((response: ApiResponse<IUserSchoolAssociation[]>) => {
@@ -44,12 +43,28 @@ export const SelectSchool = () => {
 
         if (schools) {
           setSchools(schools);
-
           const mySchool = localStorage.getItem("selectedSchool");
-          if (mySchool) {
-            const school = JSON.parse(mySchool) as ISchool;
-            setSelectedSchool(school.id!);
+          if (!mySchool) {
+            return;
           }
+
+          const searchAssociationInMySchool = schools.find(
+            (item) => item.id === JSON.parse(mySchool).id
+          );
+
+          if (!searchAssociationInMySchool) {
+            if (!schools[0]) {
+              return;
+            }
+
+            setSelectedSchool(schools[0].id!);
+            localStorage.setItem("selectedSchool", JSON.stringify(schools[0]));
+
+            return;
+          }
+
+          const school = JSON.parse(mySchool) as ISchool;
+          setSelectedSchool(school.id!);
         }
       })
       .catch((error) => {

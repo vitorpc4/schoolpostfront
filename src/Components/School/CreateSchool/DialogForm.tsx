@@ -93,7 +93,7 @@ export const DialogForm = (props: DialogFormProps) => {
                     }}
                   </ErrorMessage>
                 </div>
-                <div className="flex mt-2 gap-2">
+                <div className="flex flex-row-reverse mt-2 gap-2">
                   <button type="submit" className="btn">
                     Criar
                   </button>

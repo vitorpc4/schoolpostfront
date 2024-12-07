@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      {association.length === 0 ? <CreateSchool /> : <Welcome />}
+      {!association ? <CreateSchool /> : <Welcome />}
 
       <Toaster />
     </>

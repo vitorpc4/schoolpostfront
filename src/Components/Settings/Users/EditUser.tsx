@@ -81,7 +81,6 @@ export default function EditUser({ id, responseEdit }: IEditUserProps) {
     userRepository
       .update(values.id, values)
       .then((res) => {
-        console.log("res >>>>", res);
         responseEdit(true);
         formik.resetForm();
         closeModal();

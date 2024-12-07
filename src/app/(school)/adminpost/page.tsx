@@ -119,7 +119,6 @@ export default function AdminPosts() {
     postRepository
       .DeleteItem(id, school.id!)
       .then((response) => {
-        console.log(response);
         toast.success("Post deletado com sucesso", {
           duration: 2500,
           position: "top-right",
