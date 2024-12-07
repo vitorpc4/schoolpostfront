@@ -100,15 +100,6 @@ export default function ReadNews() {
     <>
       <div className="container mx-auto px-4 py-8">
         <article className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-          <div className="aspect-video relative">
-            <Image
-              src={image}
-              alt="Imagem da notícia"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-
           <div className="p-6">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -136,7 +127,7 @@ export default function ReadNews() {
               ></p>
               <div className="flex items-center">
                 <span className="text-sm font-medium text-gray-900 dark:text-white">
-                  Por {author}
+                  Por {data?.username}
                 </span>
               </div>
             </div>

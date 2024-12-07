@@ -144,24 +144,6 @@ export default function AdminPosts() {
   const columns = useMemo<ColumnDef<IPost>[]>(
     () => [
       {
-        header: "Image",
-        accessorKey: "image",
-        cell: (info) => (
-          <div className="flex items-center gap-3">
-            <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
-                <Image
-                  src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                  alt="Thumbnail"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-            </div>
-          </div>
-        ),
-      },
-      {
         header: "Title",
         accessorKey: "title",
         cell: ({ row }) => (
