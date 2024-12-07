@@ -1,4 +1,4 @@
-import { IUserSchoolAssociation } from "./IUserSchoolAssociation";
+import { IUserSchoolAssociation } from "../IUserSchoolAssociation";
 
 export interface IUser {
   id?: number;

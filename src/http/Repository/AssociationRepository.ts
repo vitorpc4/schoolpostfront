@@ -3,7 +3,7 @@ import { ApiResponse } from "../Models/ApiResponse";
 import { IUserSchoolAssociation } from "../Models/Response/IUserSchoolAssociation";
 import TransformResponse from "../Utils/transform";
 import { BaseRepository } from "./BaseRepository";
-import { IUser } from "../Models/Response/IUser";
+import { IUserAssociation } from "../Models/Response/IUserAssociation";
 import { IGetUserAssocationResponse } from "../Models/Response/Association/IGetUserAssocationResponse";
 
 class AssociationRepository extends BaseRepository<IUserSchoolAssociation> {
@@ -37,6 +37,10 @@ class AssociationRepository extends BaseRepository<IUserSchoolAssociation> {
     }
 
     return castResult;
+  }
+
+  delete(id: string) {
+    return super.delete(id);
   }
 }
 

@@ -2,7 +2,7 @@
 
 import { useSchool } from "@/app/context/SchoolContext";
 import { ISchool } from "@/http/Models/Response/ISchool";
-import { IUser } from "@/http/Models/Response/IUser";
+import { IUserAssociation } from "@/http/Models/Response/IUserAssociation";
 import AssociationRepository from "@/http/Repository/AssociationRepository";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
@@ -17,6 +17,8 @@ import Link from "next/link";
 import { useCallback, useMemo, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import DeleteUser from "./DeleteUser";
+import CreateUser from "./CreateUser";
+import EditUser from "./EditUser";
 
 export default function UsersTable() {
   const { association } = useSchool();
@@ -67,11 +69,25 @@ export default function UsersTable() {
   };
 
   const deleteUser = useCallback((id: number) => {
-    console.log("deletando: ", id);
-    dataQuery.refetch();
+    const associationRepository = new AssociationRepository();
+    associationRepository
+      .delete(id.toString())
+      .then(() => {
+        toast.success("Usuário excluído com sucesso", {
+          duration: 2500,
+          position: "top-right",
+        });
+        dataQuery.refetch();
+      })
+      .catch(() => {
+        toast.error("Erro ao excluir usuário", {
+          duration: 2500,
+          position: "top-right",
+        });
+      });
   }, []);
 
-  const columns = useMemo<ColumnDef<IUser>[]>(
+  const columns = useMemo<ColumnDef<IUserAssociation>[]>(
     () => [
       {
         Header: "Id",
@@ -91,16 +107,14 @@ export default function UsersTable() {
       {
         header: "Ações",
         accessorKey: "actions",
+
         cell: ({ row }) => (
           <div className="dropdown dropdown-hover">
             <div tabIndex={0} role="button" className="btn m-1">
               <Ellipsis />
             </div>
             <div className="menu dropdown-content w-32 grid gap-1 z-50">
-              <Link href={`/editPost/id?id=${row.original.id}`} className="btn">
-                <Pencil />
-                Editar
-              </Link>
+              <EditUser id={row.original.id!} responseEdit={editUserHandle} />
 
               <DeleteUser user={row.original} onDeleted={deleteUser} />
             </div>
@@ -132,13 +146,38 @@ export default function UsersTable() {
     autoResetExpanded: false,
   });
 
+  const editUserHandle = (result: boolean) => {
+    if (result) {
+      dataQuery.refetch();
+      toast.success("Usuário atualizado com sucesso", {
+        duration: 2500,
+        position: "top-right",
+      });
+      return;
+    }
+  };
+
+  const createUserHandle = (result: boolean) => {
+    if (result) {
+      dataQuery.refetch();
+      toast.success("Usuário criado com sucesso", {
+        duration: 2500,
+        position: "top-right",
+      });
+      return;
+    }
+
+    toast.error("Erro ao criar usuário", {
+      duration: 2500,
+      position: "top-right",
+    });
+  };
+
   return (
     <>
       <div>
-        <div className="flex flex-row justify-end">
-          <button className="btn">Criar usuário</button>
-        </div>
-        <table className="table table-zebra">
+        <CreateUser responseCreate={createUserHandle} />
+        <table className="table">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>

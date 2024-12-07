@@ -28,9 +28,6 @@ export const NewsCard = ({
   return (
     <>
       <div className="card bg-base-100 image-full md:w-[350] sm:w-[280]  shadow-xl">
-        <figure>
-          <img src={image} alt="Image" />
-        </figure>
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
           <p
