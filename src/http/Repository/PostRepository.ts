@@ -1,3 +1,4 @@
+import { apiUrl } from "../../../env";
 import { ApiResponse } from "../Models/ApiResponse";
 import { IPostCreateRequest } from "../Models/Requests/Post/IPostCreateRequest";
 import { IPost } from "../Models/Response/IPost";
@@ -16,14 +17,11 @@ class PostRepository extends BaseRepository<IPost> {
     const instance = this.createInstance();
 
     const result = await instance
-      .get(
-        `http://localhost:3001/${this.collection}/?page=${page}&limit=${limit}`,
-        {
-          headers: {
-            schoolid: schoolId,
-          },
-        }
-      )
+      .get(`${apiUrl}/${this.collection}/?page=${page}&limit=${limit}`, {
+        headers: {
+          schoolid: schoolId,
+        },
+      })
       .then(TransformResponse);
     const castResult = result as ApiResponse<IPostResponse>;
 
@@ -43,7 +41,7 @@ class PostRepository extends BaseRepository<IPost> {
 
     const result = await instance
       .get(
-        `http://localhost:3001/${this.collection}/find/school?page=${page}&limit=${limit}&search=${search}`,
+        `${apiUrl}/${this.collection}/find/school?page=${page}&limit=${limit}&search=${search}`,
         {
           headers: {
             schoolid: schoolId,
@@ -68,7 +66,7 @@ class PostRepository extends BaseRepository<IPost> {
 
     const result = await instance
       .get(
-        `http://localhost:3001/${this.collection}/allposts?page=${page}&limit=${limit}`,
+        `${apiUrl}/${this.collection}/allposts?page=${page}&limit=${limit}`,
         {
           headers: {
             schoolid: schoolId,
@@ -94,7 +92,7 @@ class PostRepository extends BaseRepository<IPost> {
 
     const result = await instance
       .get(
-        `http://localhost:3001/${this.collection}/allposts/search?page=${page}&limit=${limit}&search=${search}`,
+        `${apiUrl}/${this.collection}/allposts/search?page=${page}&limit=${limit}&search=${search}`,
         {
           headers: {
             schoolid: schoolId,
@@ -117,7 +115,7 @@ class PostRepository extends BaseRepository<IPost> {
     const instance = this.createInstance();
 
     const result = await instance
-      .get(`http://localhost:3001/${this.collection}/${id}`, {
+      .get(`${apiUrl}/${this.collection}/${id}`, {
         headers: {
           schoolid: schoolId,
         },
@@ -133,7 +131,7 @@ class PostRepository extends BaseRepository<IPost> {
     const instance = this.createInstance();
 
     const result = await instance
-      .post(`http://localhost:3001/${this.collection}`, post, {
+      .post(`${apiUrl}/${this.collection}`, post, {
         headers: {
           schoolid: schoolId,
         },
@@ -149,7 +147,7 @@ class PostRepository extends BaseRepository<IPost> {
     const instance = this.createInstance();
 
     const result = await instance
-      .delete(`http://localhost:3001/${this.collection}/${id}`, {
+      .delete(`${apiUrl}/${this.collection}/${id}`, {
         headers: {
           schoolid: schoolId,
         },
@@ -165,7 +163,7 @@ class PostRepository extends BaseRepository<IPost> {
     const instance = this.createInstance();
 
     const result = await instance
-      .put(`http://localhost:3001/${this.collection}/${post.id}`, post, {
+      .put(`${apiUrl}/${this.collection}/${post.id}`, post, {
         headers: {
           schoolid: schoolId,
         },

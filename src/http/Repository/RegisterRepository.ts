@@ -1,3 +1,4 @@
+import { apiUrl } from "../../../env";
 import { IRegister } from "../Interfaces/IRegister";
 import { ApiResponse } from "../Models/ApiResponse";
 import IRegisterPost from "../Models/Requests/IRegisterPost";
@@ -10,7 +11,7 @@ class RegisterRepository extends BaseRepository<IRegister> {
   public async register(data: IRegisterPost): Promise<any> {
     const instance = this.createInstance();
     const result = await instance
-      .post(`http://localhost:3001/${this.collection}/`, data)
+      .post(`${apiUrl}/${this.collection}/`, data)
       .then(TransformResponse);
     return result as ApiResponse<IRegister>;
   }

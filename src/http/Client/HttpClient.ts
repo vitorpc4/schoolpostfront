@@ -1,11 +1,12 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { apiUrl } from "../../../env";
 
 export default abstract class HttpClient {
   protected instance: AxiosInstance | undefined;
 
   protected createInstance(): AxiosInstance {
     this.instance = axios.create({
-      baseURL: "http://localhost:3001",
+      baseURL: apiUrl,
       headers: {
         "Content-Type": "application/json",
       },

@@ -5,6 +5,7 @@ import { IUserAssociation } from "../Models/Response/IUserAssociation";
 import TransformResponse from "../Utils/transform";
 import { BaseRepository } from "./BaseRepository";
 import { IUser } from "../Models/Response/User/IUser";
+import { apiUrl } from "../../../env";
 
 class UserRepository extends BaseRepository<IUser> {
   collection = "user";
@@ -12,10 +13,7 @@ class UserRepository extends BaseRepository<IUser> {
   public async createUserAssociation(data: ICreateUserRequest): Promise<any> {
     const instance = this.createInstance();
     const result = await instance
-      .post(
-        `http://localhost:3001/${this.collection}/createUserAndAssociation`,
-        data
-      )
+      .post(`${apiUrl}/${this.collection}/createUserAndAssociation`, data)
       .then(TransformResponse);
     return result as ApiResponse<any>;
   }

@@ -1,3 +1,4 @@
+import { apiUrl } from "../../../env";
 import { ApiResponse } from "../Models/ApiResponse";
 import { ISchoolCreate } from "../Models/Requests/School/ISchoolCreate";
 import { ISchool } from "../Models/Response/ISchool";
@@ -26,7 +27,7 @@ class SchoolRepository extends BaseRepository<ISchool> {
   ): Promise<ApiResponse<ISchoolResponse>> {
     const instance = this.createInstance();
     const result = await instance
-      .post(`http://localhost:3001/${this.collection}/`, item)
+      .post(`${apiUrl}/${this.collection}/`, item)
       .then(TransformResponse);
     return result as ApiResponse<ISchoolResponse>;
   }

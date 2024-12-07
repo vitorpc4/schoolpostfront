@@ -5,6 +5,7 @@ import TransformResponse from "../Utils/transform";
 import { BaseRepository } from "./BaseRepository";
 import { IUserAssociation } from "../Models/Response/IUserAssociation";
 import { IGetUserAssocationResponse } from "../Models/Response/Association/IGetUserAssocationResponse";
+import { apiUrl } from "../../../env";
 
 class AssociationRepository extends BaseRepository<IUserSchoolAssociation> {
   collection = "association";
@@ -12,7 +13,7 @@ class AssociationRepository extends BaseRepository<IUserSchoolAssociation> {
   public async getUserAssociationByUserId(id: number): Promise<any> {
     const instance = this.createInstance();
     const result = await instance
-      .get(`http://localhost:3001/${this.collection}/user/${id}`)
+      .get(`${apiUrl}/${this.collection}/user/${id}`)
       .then(TransformResponse);
 
     return result;
@@ -26,7 +27,7 @@ class AssociationRepository extends BaseRepository<IUserSchoolAssociation> {
     const instance = this.createInstance();
     const result = await instance
       .get(
-        `http://localhost:3001/${this.collection}/user/school/${id}?page=${page}&limit=${limit}`
+        `${apiUrl}/${this.collection}/user/school/${id}?page=${page}&limit=${limit}`
       )
       .then(TransformResponse);
 
