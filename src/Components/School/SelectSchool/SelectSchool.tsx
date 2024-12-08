@@ -74,22 +74,20 @@ export const SelectSchool = () => {
 
   return (
     <>
-      <div>
-        <select
-          value={selectedSchool || ""}
-          onChange={handleChange}
-          className="select select-bordered w-full max-w-xs"
-        >
-          <option value="" disabled>
-            Escolha a escola
+      <select
+        value={selectedSchool || ""}
+        onChange={handleChange}
+        className="select select-bordered w-full max-w-xs"
+      >
+        <option value="" disabled>
+          Escolha a escola
+        </option>
+        {schools?.map((item, index) => (
+          <option key={item.id} value={item.id}>
+            {item.name}
           </option>
-          {schools?.map((item, index) => (
-            <option key={item.id} value={item.id}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-      </div>
+        ))}
+      </select>
     </>
   );
 };
