@@ -1,0 +1,8 @@
+services:
+  schoolpostfront:
+    image: schoolpostfront:1.0
+    ports:
+      - "3020:3020"
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_SCHOOL_BACKEND: http://host.docker.internal:3001
