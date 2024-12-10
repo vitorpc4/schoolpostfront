@@ -50,39 +50,33 @@ export const NavBar = () => {
   return (
     <div className="drawer">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="bg-base-300 py-4">
-        <div className="flex justify-between w-screen">
-          <div className="mx-2">
-            <label
-              htmlFor="my-drawer"
-              className={`
-                   ${user == undefined ? "btn-disabled" : ""} 
-                  btn 
-                  btn-square 
-                  btn-outline`}
-            >
-              <PanelRightClose />
-            </label>
-          </div>
-          <div>
-            <SelectSchool />
-          </div>
+      <div className="bg-base-300 p-2 flex justify-between w-screen ">
+        <div>
+          <label
+            htmlFor="my-drawer"
+            className={`btn btn-square btn-outline mx-2 ${
+              !user ? "btn-disabled" : ""
+            } `}
+          >
+            <PanelRightClose />
+          </label>
+        </div>
+        <div>
+          <SelectSchool />
+        </div>
+        <div>
           <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
+            <button tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="rounded-full">
                 <CircleUser />
               </div>
-            </div>
+            </button>
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <Link href={"/settings"}>Settings</Link>
+                <Link href="/settings">Settings</Link>
               </li>
               <li onClick={logOut}>
                 <a>Logout</a>
@@ -95,53 +89,44 @@ export const NavBar = () => {
       <div className="drawer-side z-50">
         <label
           htmlFor="my-drawer"
-          aria-label="close sidebar"
           className="drawer-overlay"
+          aria-label="Close sidebar"
         ></label>
-        <div
-          className="menu bg-base-200 text-base-content min-h-screen 
-            w-96
-            p-3"
-        >
+        <nav className="menu bg-base-200 text-base-content min-h-screen w-96 p-3">
           <label
-            className={`
-                btn btn-square 
-                btn-outline drawer-overlay
-                `}
-            aria-label="close sidebar"
             htmlFor="my-drawer"
+            className="btn btn-square btn-outline drawer-overlay"
+            aria-label="Close sidebar"
           >
             <PanelLeftClose />
           </label>
-          <div>
-            <ul className="mt-2">
-              <li>
-                <Link href="/">
-                  <House />
-                  Home
-                </Link>
-              </li>
-              <li>
-                <details open>
-                  <summary>
-                    <StickyNote />
-                    Posts
-                  </summary>
-                  <ul>
+          <ul className="mt-2">
+            <li>
+              <Link href="/">
+                <House />
+                Home
+              </Link>
+            </li>
+            <li>
+              <details open>
+                <summary>
+                  <StickyNote />
+                  Posts
+                </summary>
+                <ul>
+                  <li>
+                    <Link href="/posts">Posts</Link>
+                  </li>
+                  {user?.typeUser === TypeUser.Professor && (
                     <li>
-                      <Link href="/posts">Posts</Link>
+                      <Link href="/adminpost">Administração</Link>
                     </li>
-                    {user?.typeUser === TypeUser.Professor && (
-                      <li>
-                        <Link href="/adminpost">Administração</Link>
-                      </li>
-                    )}
-                  </ul>
-                </details>
-              </li>
-            </ul>
-          </div>
-        </div>
+                  )}
+                </ul>
+              </details>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   );
