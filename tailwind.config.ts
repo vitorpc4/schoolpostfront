@@ -38,6 +38,11 @@ export default {
     "z-[1]",
     "mt-3",
     "shadow",
+    "modal",
+    "modal-bottom",
+    "sm:modal-middle",
+    "modal-box",
+    "form-control",
   ],
   mode: "jit",
   theme: {

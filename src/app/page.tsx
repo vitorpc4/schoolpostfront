@@ -7,7 +7,7 @@ import { DialogForm } from "@/Components/School/CreateSchool/DialogForm";
 import toast, { Toaster } from "react-hot-toast";
 import CreateSchool from "@/Components/School/CreateSchool/CreateSchool";
 import { ISchool } from "@/http/Models/Response/ISchool";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IUserSchoolAssociation } from "@/http/Models/Response/IUserSchoolAssociation";
 import Welcome from "@/Components/School/Welcome/welcome";
 
@@ -15,26 +15,30 @@ export default function Home() {
   const { association } = useSchool();
   const [schoolselect, setSchoolSelect] =
     useState<IUserSchoolAssociation | null>(null);
+  const [schoolExist, setSchoolExist] = useState<boolean>(false);
 
   const getInfoSelectedStation = () => {
-    if (association.length > 0) {
-      const getLocalStore = localStorage.getItem("selectedSchool");
-      if (getLocalStore != null) {
-        const selectedSchool = JSON.parse(getLocalStore) as ISchool;
+    if (association) {
+      if (association.length > 0) {
+        var searchSchool = association.find((x) => x.school);
 
-        const getAssociationBySchoolId = association.find(
-          (x) => x.school?.id === selectedSchool.id
-        );
-
-        setSchoolSelect(getAssociationBySchoolId!);
+        if (!searchSchool) {
+          setSchoolExist(false);
+        } else {
+          setSchoolExist(true);
+        }
       }
     }
   };
 
+  useEffect(() => {
+    getInfoSelectedStation();
+  }, [association]);
+
   return (
     <>
       <NavBar />
-      <div>{!association ? <CreateSchool /> : <Welcome />}</div>
+      <div>{!schoolExist ? <CreateSchool /> : <Welcome />}</div>
 
       <Toaster />
     </>
