@@ -180,24 +180,14 @@ export default function Login() {
                       return <div className="text-red-600 mt-2">{msg}</div>;
                     }}
                   </ErrorMessage>
-                  <div className="flex justify-between">
-                    <div>
-                      <label className="label">
-                        <Link
-                          href="#"
-                          className="label-text-alt link link-hover"
-                        >
-                          Forgot password?
-                        </Link>
-                      </label>
-                    </div>
+                  <div className="flex flex-row-reverse">
                     <div>
                       <label className="label">
                         <Link
                           href="/register"
                           className="label-text-alt link link-hover"
                         >
-                          Create account
+                          Criar Conta
                         </Link>
                       </label>
                     </div>
