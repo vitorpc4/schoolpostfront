@@ -124,7 +124,7 @@ export default function EditPost() {
   return (
     <>
       <div className="container mx-auto mt-5">
-        <h3 className="font-bold text-lg">Create Post</h3>
+        <h3 className="font-bold text-lg">Atualizar Post</h3>
         <FormikProvider value={formik}>
           <form onSubmit={formik.handleSubmit}>
             <fieldset>
@@ -157,6 +157,7 @@ export default function EditPost() {
                   onChange={formik.handleChange}
                   value={formik.values.author}
                   name="author"
+                  disabled
                   className="input input-bordered w-full max-w"
                 />
                 <ErrorMessage name="author">
