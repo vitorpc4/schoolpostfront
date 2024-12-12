@@ -182,8 +182,17 @@ export default function UsersTable() {
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
+                  const columnId = header.column.id;
+                  const hiddenClass =
+                    columnId === "id" || columnId === "email"
+                      ? "hidden sm:table-cell"
+                      : "";
                   return (
-                    <th key={header.id} colSpan={header.colSpan}>
+                    <th
+                      key={header.id}
+                      colSpan={header.colSpan}
+                      className={hiddenClass}
+                    >
                       {header.isPlaceholder ? null : (
                         <div>
                           {flexRender(
@@ -203,8 +212,13 @@ export default function UsersTable() {
               return (
                 <tr key={row.id}>
                   {row.getVisibleCells().map((cell) => {
+                    const columnId = cell.column.id;
+                    const hiddenClass =
+                      columnId === "id" || columnId === "email"
+                        ? "hidden sm:table-cell"
+                        : "";
                     return (
-                      <td key={cell.id}>
+                      <td key={cell.id} className={hiddenClass}>
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
