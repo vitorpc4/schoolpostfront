@@ -181,10 +181,9 @@ export default function AdminPosts() {
             <div tabIndex={0} role="button" className="btn m-1">
               <Ellipsis />
             </div>
-            <div className="menu dropdown-content w-32 grid gap-1 z-50">
+            <div className="menu dropdown-content w-16 md:w-32 grid gap-1 z-50">
               <Link href={`/editPost/id?id=${row.original.id}`} className="btn">
                 <Pencil />
-                Editar
               </Link>
 
               <DeletePost post={row.original} onDeleted={deleteItem} />
@@ -233,10 +232,10 @@ export default function AdminPosts() {
 
   return (
     <>
-      <div className="container mx-auto px-48 mt-3">
+      <div className="container mx-auto">
+        <h1 className="text-2xl font-bold mt-2 mb-4 p-2">Administrar Posts</h1>
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Administrar Posts</h1>
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-2 p-2">
             <div>
               <label className="input input-bordered flex items-center gap-2">
                 <input
@@ -260,8 +259,17 @@ export default function AdminPosts() {
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
+                    const columnId = header.column.id;
+                    const hiddenClass =
+                      columnId === "content" || columnId === "isDraft"
+                        ? "hidden sm:table-cell"
+                        : "";
                     return (
-                      <th key={header.id} colSpan={header.colSpan}>
+                      <th
+                        key={header.id}
+                        colSpan={header.colSpan}
+                        className={hiddenClass}
+                      >
                         {header.isPlaceholder ? null : (
                           <div>
                             {flexRender(
@@ -281,8 +289,13 @@ export default function AdminPosts() {
                 return (
                   <tr key={row.id}>
                     {row.getVisibleCells().map((cell) => {
+                      const columnId = cell.column.id;
+                      const hiddenClass =
+                        columnId === "content" || columnId === "isDraft"
+                          ? "hidden sm:table-cell"
+                          : "";
                       return (
-                        <td key={cell.id}>
+                        <td key={cell.id} className={hiddenClass}>
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext()
@@ -334,7 +347,7 @@ export default function AdminPosts() {
                 </button>
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="invisible md:visible flex items-center">
               {table.getRowModel().rows.length.toLocaleString()} of{" "}
               {dataQuery.data?.totalItems.toLocaleString()} rows
             </div>

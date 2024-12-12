@@ -52,7 +52,7 @@ export default function Posts() {
         return res.data || { posts: [], totalItems: 0, hasMore: false };
       }
 
-      const res = await postRepository.getPosts(page, 10, schoolId);
+      const res = await postRepository.getPosts(page, 12, schoolId);
 
       return res.data || { posts: [], totalItems: 0, hasMore: false };
     } catch (error) {

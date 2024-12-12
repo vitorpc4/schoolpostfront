@@ -94,7 +94,7 @@ export const NavBar = () => {
           className="drawer-overlay"
           aria-label="Close sidebar"
         ></label>
-        <nav className="menu bg-base-200 text-base-content min-h-screen w-96 p-3">
+        <nav className="menu bg-base-200 text-base-content min-h-screen w-80 p-3">
           <label
             htmlFor="my-drawer"
             className="btn btn-square btn-outline drawer-overlay"

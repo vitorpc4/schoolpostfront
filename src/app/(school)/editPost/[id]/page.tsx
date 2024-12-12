@@ -123,7 +123,7 @@ export default function EditPost() {
 
   return (
     <>
-      <div className="container mx-auto mt-5">
+      <div className="container mx-auto mt-5 p-1">
         <h3 className="font-bold text-lg">Atualizar Post</h3>
         <FormikProvider value={formik}>
           <form onSubmit={formik.handleSubmit}>

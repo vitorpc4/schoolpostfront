@@ -32,6 +32,7 @@ export default {
     "py-4",
     "p-2",
     "w-96",
+    "w-80",
     "w-52",
     "bg-base-100",
     "rounded-box",

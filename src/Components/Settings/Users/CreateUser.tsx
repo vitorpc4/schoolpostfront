@@ -178,33 +178,32 @@ export default function CreateUser({ responseCreate }: ICreateUserProps) {
                   <label className="label">
                     <span className="label-text">Senha</span>
                   </label>
-                  <label className="input input-bordered flex items-center gap-2">
-                    <input
-                      onChange={formik.handleChange}
-                      value={formik.values.password}
-                      type={visiblePass ? "text" : "password"}
-                      placeholder="Senha"
-                      name="password"
-                    />
 
-                    <div className=" flex flex-row-reverse w-full ml-5">
+                  <div className="input input-bordered flex items-center">
+                    <div className="">
+                      <input
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                        type={visiblePass ? "text" : "password"}
+                        placeholder="Senha"
+                        name="password"
+                      />
+                    </div>
+                    <div className="absolute inset-y-2- right-0 flex items-center pr-7 space-x-2">
                       <button
                         type="button"
-                        className="btn-sm"
+                        className="ml-6"
                         onClick={changeVisiblePass}
                       >
                         {visiblePass ? <Eye /> : <EyeClosed />}
                       </button>
 
-                      <button
-                        type="button"
-                        className="btn-sm mr-3"
-                        onClick={generateRandomPassword}
-                      >
+                      <button type="button" onClick={generateRandomPassword}>
                         <RefreshCcw />
                       </button>
                     </div>
-                  </label>
+                  </div>
+
                   <ErrorMessage name="password">
                     {(msg) => {
                       return <div className="text-red-600 mt-2">{msg}</div>;
