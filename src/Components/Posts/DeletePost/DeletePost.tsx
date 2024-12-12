@@ -24,7 +24,7 @@ export default function DeletePost({ post, onDeleted }: IDeletePostProps) {
     <>
       <div>
         <button
-          className="btn w-32"
+          className="btn w-8 md:w-32"
           onClick={() => {
             const modal = document.getElementById(
               "modal_" + post.id!.toString()
@@ -34,7 +34,7 @@ export default function DeletePost({ post, onDeleted }: IDeletePostProps) {
             }
           }}
         >
-          <Trash /> Excluir
+          <Trash />
         </button>
         <dialog
           id={`modal_${post.id!.toString()}`}
@@ -46,7 +46,7 @@ export default function DeletePost({ post, onDeleted }: IDeletePostProps) {
             </h3>
             <p className="py-4">Tem certeza que deseja excluir o post?</p>
             <p>Titulo: {post.title}</p>
-            <p>Autor: Author Is HERE</p>
+            <p>Autor: {post.username}</p>
             <div className="modal-action">
               <form onSubmit={handleSubmit} method="dialog">
                 <div className="flex gap-2">

@@ -214,20 +214,16 @@ export default function EditUser({ id, responseEdit }: IEditUserProps) {
                       name="password"
                     />
 
-                    <div className=" flex flex-row-reverse w-full ml-5">
+                    <div className="absolute inset-y-2- right-0 flex items-center pr-7 space-x-2">
                       <button
                         type="button"
-                        className="btn-sm"
+                        className="btn-sm ml-6"
                         onClick={changeVisiblePass}
                       >
                         {visiblePass ? <Eye /> : <EyeClosed />}
                       </button>
 
-                      <button
-                        type="button"
-                        className="btn-sm mr-3"
-                        onClick={generateRandomPassword}
-                      >
+                      <button type="button" onClick={generateRandomPassword}>
                         <RefreshCcw />
                       </button>
                     </div>

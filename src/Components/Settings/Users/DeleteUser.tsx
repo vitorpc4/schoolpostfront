@@ -47,7 +47,7 @@ export default function DeleteUser({ user, onDeleted }: IDeleteUserProps) {
             </div>
             <div className="flex flex-row-reverse mt-2 gap-2">
               <button
-                className="btn"
+                className="btn btn-error"
                 onClick={() => {
                   onDeleted(user.userSchoolAssociationId!);
                   closeModal();
@@ -55,7 +55,7 @@ export default function DeleteUser({ user, onDeleted }: IDeleteUserProps) {
               >
                 Excluir
               </button>
-              <button className="btn btn-secondary" onClick={closeModal}>
+              <button className="btn " onClick={closeModal}>
                 Cancelar
               </button>
             </div>
