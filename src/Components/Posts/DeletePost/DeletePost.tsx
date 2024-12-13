@@ -24,7 +24,7 @@ export default function DeletePost({ post, onDeleted }: IDeletePostProps) {
     <>
       <div>
         <button
-          className="btn w-8 md:w-32"
+          className="btn w-16 md:w-32"
           onClick={() => {
             const modal = document.getElementById(
               "modal_" + post.id!.toString()
@@ -38,7 +38,7 @@ export default function DeletePost({ post, onDeleted }: IDeletePostProps) {
         </button>
         <dialog
           id={`modal_${post.id!.toString()}`}
-          className="modal modal-bottom sm:modal-middle"
+          className="modal sm:modal-middle"
         >
           <div className="modal-box">
             <h3 className="font-bold text-lg flex gap-3">

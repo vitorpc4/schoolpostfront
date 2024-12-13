@@ -113,7 +113,7 @@ export default function UsersTable() {
             <div tabIndex={0} role="button" className="btn m-1">
               <Ellipsis />
             </div>
-            <div className="menu dropdown-content w-32 grid gap-1 z-50">
+            <div className="menu dropdown-content grid gap-1 z-50">
               <EditUser id={row.original.id!} responseEdit={editUserHandle} />
 
               <DeleteUser user={row.original} onDeleted={deleteUser} />

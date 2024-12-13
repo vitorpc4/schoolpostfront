@@ -145,7 +145,7 @@ export default function EditUser({ id, responseEdit }: IEditUserProps) {
     <>
       <div className="flex flex-row justify-end">
         <button
-          className="btn w-32"
+          className="btn w-16"
           onClick={() => {
             const modal = document.getElementById(
               `updateUserModal${id}`
@@ -157,7 +157,6 @@ export default function EditUser({ id, responseEdit }: IEditUserProps) {
           }}
         >
           <Pencil />
-          Editar
         </button>
       </div>
       <dialog id={`updateUserModal${id}`} className="modal">

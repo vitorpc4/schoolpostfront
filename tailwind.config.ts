@@ -44,6 +44,7 @@ export default {
     "sm:modal-middle",
     "modal-box",
     "form-control",
+    "p-1",
   ],
   mode: "jit",
   theme: {

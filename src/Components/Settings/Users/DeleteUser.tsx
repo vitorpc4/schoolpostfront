@@ -23,7 +23,7 @@ export default function DeleteUser({ user, onDeleted }: IDeleteUserProps) {
   return (
     <div>
       <button
-        className="btn w-32"
+        className="btn w-16"
         onClick={() => {
           const modal = document.getElementById(
             "modalDelete" + user.id!.toString()
@@ -33,7 +33,7 @@ export default function DeleteUser({ user, onDeleted }: IDeleteUserProps) {
           }
         }}
       >
-        <Trash /> Excluir
+        <Trash />
       </button>
       <dialog id={"modalDelete" + user.id!.toString()} className="modal">
         <div className="modal-box">

@@ -3,7 +3,7 @@ import UsersTable from "@/Components/Settings/Users/UsersTable";
 export default function Settings() {
   return (
     <div>
-      <div className="container mx-auto mt-2">
+      <div className="container mx-auto mt-2 p-1">
         <h1 className="text-3xl font-bold">Configurações</h1>
         <div className="mt-5">
           <div role="tablist" className="tabs tabs-lifted">
