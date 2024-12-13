@@ -65,45 +65,40 @@ export const DialogForm = (props: DialogFormProps) => {
         Criar Escola
       </button>
 
-      <dialog
-        id="createSchoolModal"
-        className="modal modal-bottom sm:modal-middle"
-      >
+      <dialog id="createSchoolModal" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Cria Escola</h3>
 
-          <div className="">
-            <FormikProvider value={formik}>
-              <form onSubmit={formik.handleSubmit} method="dialog">
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Nome</span>
-                  </label>
-                  <input
-                    onChange={formik.handleChange}
-                    value={formik.values.schoolName}
-                    type="text"
-                    placeholder="Nome"
-                    name="schoolName"
-                    className="input input-bordered"
-                  />
-                  <ErrorMessage name="schoolName">
-                    {(msg) => {
-                      return <div className="text-red-600 mt-2">{msg}</div>;
-                    }}
-                  </ErrorMessage>
-                </div>
-                <div className="flex flex-row-reverse mt-2 gap-2">
-                  <button type="submit" className="btn">
-                    Criar
-                  </button>
-                  <button onClick={closeModal} className="btn">
-                    Close
-                  </button>
-                </div>
-              </form>
-            </FormikProvider>
-          </div>
+          <FormikProvider value={formik}>
+            <form onSubmit={formik.handleSubmit} method="dialog">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Nome</span>
+                </label>
+                <input
+                  onChange={formik.handleChange}
+                  value={formik.values.schoolName}
+                  type="text"
+                  placeholder="Nome"
+                  name="schoolName"
+                  className="input input-bordered"
+                />
+                <ErrorMessage name="schoolName">
+                  {(msg) => {
+                    return <div className="text-red-600 mt-2">{msg}</div>;
+                  }}
+                </ErrorMessage>
+              </div>
+              <div className="flex flex-row-reverse mt-2 gap-2">
+                <button type="submit" className="btn">
+                  Criar
+                </button>
+                <button onClick={closeModal} className="btn">
+                  Close
+                </button>
+              </div>
+            </form>
+          </FormikProvider>
         </div>
       </dialog>
     </>
