@@ -7,6 +7,8 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: password
+    networks:
+      - schoolnetwork
   app:
     image: vitorpc4/schoolpost
     container_name: schoolpostbackend
@@ -25,6 +27,8 @@ services:
       - JWT_SECRET=secret
       - JWT_EXPIRES_IN=120m
       - JWT_SECRET_INVITE=supersupersecret
+    networks:
+      - schoolnetwork
   schoolpostfront:
     image: vitorpc4/schoolpostfront
     container_name: schoolpostfront
@@ -32,7 +36,11 @@ services:
       - "3020:3020"
     environment:
       NODE_ENV: production
-      NEXT_PUBLIC_SCHOOL_BACKEND: http://host.docker.internal:3001
+      NEXT_PUBLIC_SCHOOL_BACKEND: http://localhost:3001
     depends_on:
       - db
       - app
+    networks:
+      - schoolnetwork
+networks:
+  schoolnetwork:
