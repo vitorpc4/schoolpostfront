@@ -45,6 +45,13 @@ export default {
     "modal-box",
     "form-control",
     "p-1",
+    "absolute",
+    "inset-y-2-",
+    "right-0",
+    "flex",
+    "items-center",
+    "pr-7",
+    "space-x-2",
   ],
   mode: "jit",
   theme: {
