@@ -5,11 +5,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install --force
 
-ENV NODE_ENV=${NODE_ENV}
-ENV NEXT_PUBLIC_SCHOOL_BACKEND=${NEXT_PUBLIC_SCHOOL_BACKEND}
-
-RUN echo "NODE_ENV=${NODE_ENV}" > .env.production
-RUN echo "NEXT_PUBLIC_SCHOOL_BACKEND=${NEXT_PUBLIC_SCHOOL_BACKEND}" >> .env.production
+COPY .env.production .env.production
 
 COPY . .
 
@@ -22,7 +18,6 @@ WORKDIR /app
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY package.json package-lock.json ./
-COPY --from=builder /app/.env.production ./.env.production
 
 RUN npm install --force --production
 
