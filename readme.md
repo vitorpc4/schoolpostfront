@@ -34,21 +34,8 @@ git clone https://github.com/vitorpc4/schoolpostfront.git
 # Navegue até o diretório do projeto
 cd schoolpostfront
 
-# Por limitações do nextjs em tratar variáveis de ambientes, será necessário criar um arquivo
-# .env.production no projeto.
-
-NODE_ENV=production
-NEXT_PUBLIC_SCHOOL_BACKEND=http://localhost:3001
-
-#  O arquivo pode ser criado manualmente, ou executando os comandos abaixo para criação automática
-
-# Windows Powershel
-
-"NEXT_PUBLIC_SCHOOL_BACKEND=http://localhost:3001" | Out-File -FilePath .env.production -Force; "NODE_ENV=production" | Out-File -FilePath .env.production -Append
-
-# Unix (Linux Ou MacOs)
-
-echo -e "NEXT_PUBLIC_SCHOOL_BACKEND=http://localhost:3001\nNODE_ENV=production" > .env.production
+# Se necessário alterar o valor de Arg no docker compose antes de realizar a
+# ação de subir os containers
 
 # suba os containers
 
