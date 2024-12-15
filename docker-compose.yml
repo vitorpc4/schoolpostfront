@@ -30,13 +30,12 @@ services:
     networks:
       - schoolnetwork
   schoolpostfront:
-    image: vitorpc4/schoolpostfront
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: schoolpostfront
     ports:
       - "3020:3020"
-    environment:
-      NODE_ENV: production
-      NEXT_PUBLIC_SCHOOL_BACKEND: http://localhost:3001
     depends_on:
       - db
       - app

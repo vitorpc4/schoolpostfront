@@ -34,11 +34,25 @@ git clone https://github.com/vitorpc4/schoolpostfront.git
 # Navegue até o diretório do projeto
 cd schoolpostfront
 
-# Modifique as variáveis de ambiente necessárias no arquivo Docker Compose.
+# Por limitações do nextjs em tratar variáveis de ambientes, será necessário criar um arquivo
+# .env.production no projeto.
 
-#suba os containers
+NODE_ENV=production
+NEXT_PUBLIC_SCHOOL_BACKEND=http://localhost:3001
 
-docker compose up -d
+#  O arquivo pode ser criado manualmente, ou executando os comandos abaixo para criação automática
+
+# Windows Powershel
+
+"NEXT_PUBLIC_SCHOOL_BACKEND=http://localhost:3001" | Out-File -FilePath .env.production -Force; "NODE_ENV=production" | Out-File -FilePath .env.production -Append
+
+# Unix (Linux Ou MacOs)
+
+echo -e "NEXT_PUBLIC_SCHOOL_BACKEND=http://localhost:3001\nNODE_ENV=production" > .env.production
+
+# suba os containers
+
+docker compose up -d --build
 ```
 
 - Atenção, durante caso você enfrente problemas com o build sugiro que seja feito o seguinte procedimentos
