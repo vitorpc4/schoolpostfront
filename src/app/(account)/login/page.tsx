@@ -125,8 +125,6 @@ export default function Login() {
       .find((x) => x.includes("token"))
       ?.split("=")[1];
 
-    console.log("testei >> ", token);
-
     if (token) {
       router.push("/");
     }
