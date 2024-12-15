@@ -120,7 +120,12 @@ export default function Login() {
   };
 
   useEffect(() => {
-    const token = document.cookie.split("=")[1];
+    const token = document.cookie
+      .split(";")
+      .find((x) => x.includes("token"))
+      ?.split("=")[1];
+
+    console.log("testei >> ", token);
 
     if (token) {
       router.push("/");

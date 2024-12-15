@@ -24,6 +24,16 @@ export const NavBar = () => {
     router.push("/login");
   };
 
+  const checkLogin = () => {
+    const token = document.cookie
+      .split(";")
+      .find((x) => x.includes("token"))
+      ?.split("=")[1];
+
+    if (!token) {
+      router.push("/login");
+    }
+  };
   const getInfoSelectedStation = () => {
     if (!association) return;
 
@@ -44,6 +54,7 @@ export const NavBar = () => {
   };
 
   useEffect(() => {
+    checkLogin();
     getInfoSelectedStation();
   }, [getInfoSelectedStation]);
 
